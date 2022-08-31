@@ -26,9 +26,14 @@ class StoreMediaRequestTransformer implements StoreMediaRequestTransformerContra
             ->setModelId($attributes['model_id'])
             ->setModelType($attributes['model_type'])
             ->addMediaCollection(
-                collect($attributes['files'])->map(fn (array $rawFile) => 
-                    $this->storableMediaTransformer->fromArray($rawFile)
-                )->filter()
+                // Adding storable media only.
+                collect($attributes['files'])->map(function (array $rawFile) use ($request) {
+                    $media = $this->storableMediaTransformer->fromArray($rawFile);
+                    return $media ?
+                        // Setting media collection to main collection if currently set to null.
+                        $media->setCollection($media->getCollection() ?: $request->getCollection())
+                        : null;
+                })->filter()
             )->useQueue($attributes['use_queue']);
     }
 
@@ -40,7 +45,10 @@ class StoreMediaRequestTransformer implements StoreMediaRequestTransformerContra
             'app_key' => $request->getAppKey(),
             'collection' => $request->getCollection(),
             'files' => $request->getMedia()->map(fn (StorableMediaContract $media) =>
-                $this->storableMediaTransformer->toArray($media)
+                $this->storableMediaTransformer->toArray(
+                    // Setting media collection to main collection if null.
+                    $media->setCollection($media->getCollection() ?: $request->getCollection())
+                )
             ),
             'use_queue' => $request->isUsingQueue()
         ];
