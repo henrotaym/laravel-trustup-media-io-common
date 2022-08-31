@@ -1,0 +1,15 @@
+{
+    "name": "laravel-trustup-media-io-common",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "git@github.com:henrotaym/laravel-trustup-media-io-common.git",
+    "author": "Mathieu Henrotay <mathieu.henrotay@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "postversion": "npm run push",
+        "commit": "gitmoji -c && npm run push",
+        "push": "git push && git push --tags",
+        "commit:all": "git add . && npm run commit",
+        "alpha": "npm version --preid=alpha"
+    }
+}
