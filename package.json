@@ -10,6 +10,7 @@
         "commit": "gitmoji -c && npm run push",
         "push": "git push && git push --tags",
         "commit:all": "git add . && npm run commit",
-        "alpha": "npm version --preid=alpha"
+        "alpha": "npm version --preid=alpha",
+        "version:alpha": "npm version prerelease --preid=alpha"
     }
 }

@@ -1,7 +1,20 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIoCommon\Providers;
 
+use Henrotaym\LaravelTrustupMediaIoCommon\Package;
+use Henrotaym\LaravelTrustupMediaIoCommon\Models\StorableMedia;
+use Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media\GetMediaRequest;
+use Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media\StoreMediaRequest;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\StorableMediaContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Models\StorableMediaTransformer;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Requests\Media\GetMediaRequestTransformer;
+use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Requests\Media\StoreMediaRequestTransformer;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\StorableMediaTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
 
 class LaravelTrustupMediaIoCommonServiceProvider extends VersionablePackageServiceProvider
 {
