@@ -34,7 +34,7 @@ class StoreMediaRequestTransformer implements StoreMediaRequestTransformerContra
                         $media->setCollection($media->getCollection() ?: $request->getCollection())
                         : null;
                 })->filter()
-            )->useQueue($attributes['use_queue']);
+            )->useQueue($attributes['use_queue'] ?? true);
     }
 
     public function toArray(StoreMediaRequestContract $request): array
