@@ -1,6 +1,6 @@
 {
     "name": "laravel-trustup-media-io-common",
-    "version": "1.0.2-alpha.0",
+    "version": "1.0.2-alpha.1",
     "main": "index.js",
     "repository": "git@github.com:henrotaym/laravel-trustup-media-io-common.git",
     "author": "Mathieu Henrotay <mathieu.henrotay@gmail.com>",
