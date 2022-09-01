@@ -85,15 +85,15 @@ class StorableMediaTransformer implements StorableMediaTransformerContract
     {
         // strip out data uri scheme information (see RFC 2397)
         if (str_contains($resource, ';base64')):
-            [$_, $base64] = explode(';', $resource);
-            [$_, $base64] = explode(',', $base64);
+            [$_, $resource] = explode(';', $resource);
+            [$_, $resource] = explode(',', $resource);
         endif;
 
         // strict mode filters for non-base64 alphabet characters
-        $binary = base64_decode($base64, true);
+        $binary = base64_decode($resource, true);
 
         return $binary !== false
-            && base64_encode($binary) === $base64;
+            && base64_encode($binary) === $resource;
     }
 
     protected function isFile($resource): bool

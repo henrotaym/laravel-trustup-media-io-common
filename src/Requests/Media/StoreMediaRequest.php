@@ -39,7 +39,7 @@ class StoreMediaRequest extends MediaRequest implements StoreMediaRequestContrac
      */
     public function addMediaCollection(Collection $mediaCollection): StoreMediaRequestContract
     {
-        $this->getMedia()->merge($mediaCollection);
+        $this->getMedia()->push(...$mediaCollection);
 
         return $this;
     }

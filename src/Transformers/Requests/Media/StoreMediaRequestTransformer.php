@@ -49,7 +49,7 @@ class StoreMediaRequestTransformer implements StoreMediaRequestTransformerContra
                     // Setting media collection to main collection if null.
                     $media->setCollection($media->getCollection() ?: $request->getCollection())
                 )
-            ),
+            )->all(),
             'use_queue' => $request->isUsingQueue()
         ];
     }

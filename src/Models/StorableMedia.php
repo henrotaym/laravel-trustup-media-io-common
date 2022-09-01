@@ -9,8 +9,8 @@ class StorableMedia implements StorableMediaContract
 {
     /** @var string|UploadedFile|StreamInterface */
     protected $resource;
-    protected ?string $collection;
-    protected ?string $name;
+    protected ?string $collection = null;
+    protected ?string $name = null;
     protected string $type;
     protected array $customProperties = [];
 
