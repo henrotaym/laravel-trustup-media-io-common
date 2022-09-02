@@ -57,14 +57,8 @@ class StorableMediaTransformer implements StorableMediaTransformerContract
     public function toArray(StorableMediaContract $media): array
     {
         return [
-            'resource' => $media->isFile() ?
-                $media->getResource()->get()
-                : $media->getResource(),
-            'name' => $media->getName() ?:
-                ($media->isFile() ?
-                    $media->getResource()->getClientOriginalName()
-                    : null)
-            ,
+            'resource' => $media->getResource(),
+            'name' => $media->getName(),
             'collection' => $media->getCollection(),
             'custom_properties' => $media->getCustomProperties()
         ];
