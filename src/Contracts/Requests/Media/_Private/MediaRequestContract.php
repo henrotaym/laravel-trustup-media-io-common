@@ -8,6 +8,11 @@ interface MediaRequestContract
     public function getCollection(): ?string;
 
     public function hasAppKey(): bool;
+
+    /**
+     * True if user explicitely asked for not having app key.
+     */
+    public function isExplicitelyNotHavingAppKey(): bool;
     
     public function getAppKey(): ?string;
     

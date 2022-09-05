@@ -6,9 +6,10 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\Medi
 abstract class MediaRequest implements MediaRequestContract
 {
     protected string $modelType;
+    protected bool $explicitelyNotHavingAppKey = false;
     protected int $modelId;
     protected ?string $collection;
-    protected ?string $appKey; 
+    protected ?string $appKey;
 
     /** @return static */
     public function setCollection(?string $collection = null): MediaRequestContract
@@ -21,6 +22,10 @@ abstract class MediaRequest implements MediaRequestContract
     /** @return static */
     public function setAppKey(?string $appKey = null): MediaRequestContract
     {
+        if (!$appKey):
+            $this->explicitelyNotHavingAppKey = true;
+        endif;
+
         $this->appKey = $appKey;
 
         return $this;
@@ -55,6 +60,14 @@ abstract class MediaRequest implements MediaRequestContract
     public function hasAppKey(): bool
     {
         return !!$this->appKey;
+    }
+
+    /**
+     * True if user explicitely asked for not having app key.
+     */
+    public function isExplicitelyNotHavingAppKey(): bool
+    {
+        return $this->explicitelyNotHavingAppKey;
     }
     
     public function getAppKey(): ?string
