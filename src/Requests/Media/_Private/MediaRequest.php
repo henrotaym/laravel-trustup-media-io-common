@@ -2,6 +2,7 @@
 namespace Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media\_Private;
 
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private\MediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 
 abstract class MediaRequest implements MediaRequestContract
 {
@@ -17,6 +18,12 @@ abstract class MediaRequest implements MediaRequestContract
         $this->collection = $collection;
 
         return $this;
+    }
+
+    /** @return static */
+    public function setMediaCollection(MediaCollections $mediaCollection): MediaRequestContract
+    {
+        return $this->setCollection($mediaCollection->getName());
     }
     
     /** @return static */

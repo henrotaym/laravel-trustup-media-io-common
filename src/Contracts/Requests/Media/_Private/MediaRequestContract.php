@@ -1,6 +1,8 @@
 <?php
 namespace Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\_Private;
 
+use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
+
 interface MediaRequestContract
 {
     public function hasCollection(): bool;
@@ -26,6 +28,9 @@ interface MediaRequestContract
 
     /** @return static */
     public function setCollection(?string $collection = null): MediaRequestContract;
+
+    /** @return static */
+    public function setMediaCollection(MediaCollections $mediaCollection): MediaRequestContract;
     
     /** @return static */
     public function setAppKey(?string $appKey = null): MediaRequestContract;
