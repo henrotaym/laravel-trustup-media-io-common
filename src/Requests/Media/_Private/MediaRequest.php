@@ -7,10 +7,10 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 abstract class MediaRequest implements MediaRequestContract
 {
     protected string $modelType;
-    protected bool $explicitelyNotHavingAppKey = false;
     protected int $modelId;
-    protected ?string $collection;
-    protected ?string $appKey;
+    protected bool $explicitelyNotHavingAppKey = false;
+    protected ?string $collection = null;
+    protected ?string $appKey = null;
 
     /** @return static */
     public function setCollection(?string $collection = null): MediaRequestContract
