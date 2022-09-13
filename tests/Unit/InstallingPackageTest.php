@@ -1,38 +1,14 @@
 <?php
-namespace Henrotaym\LaravelTrustupTaskIoCommon\Tests\Unit;
+namespace Henrotaym\LaravelTrustupMediaIoCommon\Tests\Unit;
 
-use Henrotaym\LaravelTrustupTaskIoCommon\Tests\TestCase;
+use Henrotaym\LaravelTrustupMediaIoCommon\Tests\TestCase;
 use Henrotaym\LaravelPackageVersioning\Testing\Traits\InstallPackageTest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Package;
-use Henrotaym\LaravelTrustupTaskIoCommon\Models\Task;
-use Henrotaym\LaravelTrustupTaskIoCommon\Models\User;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Models\TaskContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Models\UserContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Requests\Task\ShowTaskRequest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Requests\Task\IndexTaskRequest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Requests\Task\StoreTaskRequest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Requests\Task\UpdateTaskRequest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Requests\Task\DestroyTaskRequest;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Models\TaskTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Models\UserTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Requests\Task\ShowTaskRequestContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Requests\Task\IndexTaskRequestContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Requests\Task\StoreTaskRequestContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Requests\Task\UpdateTaskRequestContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Requests\Task\DestroyTaskRequestContract;
-use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Models\TaskTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Models\UserTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Requests\Task\ShowTaskRequestTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Requests\Task\IndexTaskRequestTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Requests\Task\StoreTaskRequestTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Requests\Task\UpdateTaskRequestTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Transformers\Requests\Task\DestroyTaskRequestTransformer;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\ShowTaskRequestTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\IndexTaskRequestTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\StoreTaskRequestTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\UpdateTaskRequestTransformerContract;
-use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\DestroyTaskRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Models\StorableMediaContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\StorableMediaTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
 
 class InstallingPackageTest extends TestCase
 {
@@ -41,26 +17,13 @@ class InstallingPackageTest extends TestCase
     /** @test */
     public function gettingMediaClient()
     {
-        dd($this->app->make(TaskContract::class), 
-        $this->app->make(UserContract::class), 
-
-        // Requests
-        $this->app->make(DestroyTaskRequestContract::class), 
-        $this->app->make(IndexTaskRequestContract::class), 
-        $this->app->make(ShowTaskRequestContract::class), 
-        $this->app->make(StoreTaskRequestContract::class), 
-        $this->app->make(UpdateTaskRequestContract::class), 
-
-        // Transformers
-        
-            // Models 
-            $this->app->make(TaskTransformerContract::class), 
-            $this->app->make(UserTransformerContract::class), 
-            // Requests
-            $this->app->make(DestroyTaskRequestTransformerContract::class), 
-            $this->app->make(IndexTaskRequestTransformerContract::class), 
-            $this->app->make(ShowTaskRequestTransformerContract::class), 
-            $this->app->make(StoreTaskRequestTransformerContract::class), 
-            $this->app->make(UpdateTaskRequestTransformerContract::class),);
+        dd(
+            $this->app->make(StorableMediaContract::class),
+            $this->app->make(GetMediaRequestContract::class),
+            $this->app->make(StoreMediaRequestContract::class),
+            $this->app->make(StorableMediaTransformerContract::class),
+            $this->app->make(GetMediaRequestTransformerContract::class),
+            $this->app->make(StoreMediaRequestTransformerContract::class)
+        );
     }
 }

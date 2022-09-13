@@ -1,7 +1,7 @@
 <?php
-namespace Henrotaym\LaravelTrustupTaskIoCommon\Facades;
+namespace Henrotaym\LaravelTrustupMediaIoCommon\Facades;
 
-use Henrotaym\LaravelTrustupTaskIoCommon\Package as Underlying;
+use Henrotaym\LaravelTrustupMediaIoCommon\Package as Underlying;
 use Henrotaym\LaravelPackageVersioning\Facades\Abstracts\VersionablePackageFacade;
 
 class Package extends VersionablePackageFacade
