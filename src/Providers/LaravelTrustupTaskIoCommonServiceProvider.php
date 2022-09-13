@@ -1,8 +1,6 @@
 <?php
-namespace Henrotaym\LaravelTrustupTaskIoCommon\Tests\Unit;
+namespace Henrotaym\LaravelTrustupTaskIoCommon\Providers;
 
-use Henrotaym\LaravelTrustupTaskIoCommon\Tests\TestCase;
-use Henrotaym\LaravelPackageVersioning\Testing\Traits\InstallPackageTest;
 use Henrotaym\LaravelTrustupTaskIoCommon\Package;
 use Henrotaym\LaravelTrustupTaskIoCommon\Models\Task;
 use Henrotaym\LaravelTrustupTaskIoCommon\Models\User;
@@ -34,33 +32,41 @@ use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\St
 use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\UpdateTaskRequestTransformerContract;
 use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\Transformers\Requests\Task\DestroyTaskRequestTransformerContract;
 
-class InstallingPackageTest extends TestCase
+class LaravelTrustupTaskIoCommonServiceProvider extends VersionablePackageServiceProvider
 {
-    use InstallPackageTest;
-
-    /** @test */
-    public function gettingMediaClient()
+    public static function getPackageClass(): string
     {
-        dd($this->app->make(TaskContract::class), 
-        $this->app->make(UserContract::class), 
+        return Package::class;
+    }
+
+    protected function addToRegister(): void
+    {
+        // Models
+        $this->app->bind(TaskContract::class, Task::class);
+        $this->app->bind(UserContract::class, User::class);
 
         // Requests
-        $this->app->make(DestroyTaskRequestContract::class), 
-        $this->app->make(IndexTaskRequestContract::class), 
-        $this->app->make(ShowTaskRequestContract::class), 
-        $this->app->make(StoreTaskRequestContract::class), 
-        $this->app->make(UpdateTaskRequestContract::class), 
+        $this->app->bind(DestroyTaskRequestContract::class, DestroyTaskRequest::class);
+        $this->app->bind(IndexTaskRequestContract::class, IndexTaskRequest::class);
+        $this->app->bind(ShowTaskRequestContract::class, ShowTaskRequest::class);
+        $this->app->bind(StoreTaskRequestContract::class, StoreTaskRequest::class);
+        $this->app->bind(UpdateTaskRequestContract::class, UpdateTaskRequest::class);
 
         // Transformers
         
             // Models 
-            $this->app->make(TaskTransformerContract::class), 
-            $this->app->make(UserTransformerContract::class), 
+            $this->app->bind(TaskTransformerContract::class, TaskTransformer::class);
+            $this->app->bind(UserTransformerContract::class, UserTransformer::class);
             // Requests
-            $this->app->make(DestroyTaskRequestTransformerContract::class), 
-            $this->app->make(IndexTaskRequestTransformerContract::class), 
-            $this->app->make(ShowTaskRequestTransformerContract::class), 
-            $this->app->make(StoreTaskRequestTransformerContract::class), 
-            $this->app->make(UpdateTaskRequestTransformerContract::class),);
+            $this->app->bind(DestroyTaskRequestTransformerContract::class, DestroyTaskRequestTransformer::class);
+            $this->app->bind(IndexTaskRequestTransformerContract::class, IndexTaskRequestTransformer::class);
+            $this->app->bind(ShowTaskRequestTransformerContract::class, ShowTaskRequestTransformer::class);
+            $this->app->bind(StoreTaskRequestTransformerContract::class, StoreTaskRequestTransformer::class);
+            $this->app->bind(UpdateTaskRequestTransformerContract::class, UpdateTaskRequestTransformer::class);
+    }
+
+    protected function addToBoot(): void
+    {
+        //
     }
 }

@@ -1,6 +1,6 @@
 {
-    "name": "henrotaym/laravel-trustup-media-io-common",
-    "description": "Used by trustup applications to store and retrieve media",
+    "name": "henrotaym/laravel-trustup-task-io-common",
+    "description": "Used by trustup applications to manage tasks",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -18,18 +18,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Henrotaym\\LaravelTrustupMediaIoCommon\\": "src"
+            "Henrotaym\\LaravelTrustupTaskIoCommon\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Henrotaym\\LaravelTrustupMediaIoCommon\\Tests\\": "tests"
+            "Henrotaym\\LaravelTrustupTaskIoCommon\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Henrotaym\\LaravelTrustupMediaIoCommon\\Providers\\LaravelTrustupMediaIoCommonServiceProvider"
+                "Henrotaym\\LaravelTrustupTaskIoCommon\\Providers\\LaravelTrustupTaskIoCommonServiceProvider"
             ]
         }
     }

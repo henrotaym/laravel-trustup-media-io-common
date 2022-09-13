@@ -1,9 +1,9 @@
 <?php
-namespace Henrotaym\LaravelTrustupMediaIoCommon\Tests;
+namespace Henrotaym\LaravelTrustupTaskIoCommon\Tests;
 
-use Henrotaym\LaravelTrustupMediaIoCommon\Package;
+use Henrotaym\LaravelTrustupTaskIoCommon\Package;
 use Henrotaym\LaravelPackageVersioning\Testing\VersionablePackageTestCase;
-use Henrotaym\LaravelTrustupMediaIoCommon\Providers\LaravelTrustupMediaIoCommonServiceProvider;
+use Henrotaym\LaravelTrustupTaskIoCommon\Providers\LaravelTrustupTaskIoCommonServiceProvider;
 
 class TestCase extends VersionablePackageTestCase
 {
@@ -15,7 +15,7 @@ class TestCase extends VersionablePackageTestCase
     public function getServiceProviders(): array
     {
         return [
-            LaravelTrustupMediaIoCommonServiceProvider::class
+            LaravelTrustupTaskIoCommonServiceProvider::class
         ];
     }
 }

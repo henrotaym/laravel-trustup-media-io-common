@@ -1,13 +1,13 @@
 <?php
-namespace Henrotaym\LaravelTrustupMediaIoCommon;
+namespace Henrotaym\LaravelTrustupTaskIoCommon;
 
-use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\PackageContract;
+use Henrotaym\LaravelTrustupTaskIoCommon\Contracts\PackageContract;
 use Henrotaym\LaravelPackageVersioning\Services\Versioning\VersionablePackage;
 
 class Package extends VersionablePackage implements PackageContract
 {
     public static function prefix(): string
     {
-        return "laravel_trustup_media_io_common";
+        return "laravel_trustup_task_io_common";
     }
 }
