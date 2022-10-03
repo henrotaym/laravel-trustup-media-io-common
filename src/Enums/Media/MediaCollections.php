@@ -12,4 +12,20 @@ enum MediaCollections: string
     {
         return $this->value;
     }
+
+    /** @return array<MediaConversions> */
+    public function getConversions(): array
+    {
+        switch ($this):
+            case self::IMAGES:
+                return MediaConversions::cases();
+            default:
+                return [];
+        endswitch;
+    }
+
+    public function hasConversions(): bool
+    {
+        return count($this->getConversions()) > 0;
+    }
 }
