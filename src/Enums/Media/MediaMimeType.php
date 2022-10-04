@@ -20,16 +20,15 @@ enum MediaMimeType: string
     public function getCollection(): MediaCollections
     {
         switch ($this):
-            case self::JPEG
-                || self::JPG
-                || self::PNG
-                || self::GIF
-                || self::SVG
-            :
+            case self::JPEG:
+            case self::JPG:
+            case self::PNG:
+            case self::GIF:
+            case self::SVG:
                 return MediaCollections::IMAGES;
-            case self::MP4
-                || self::MOV
-            :
+
+            case self::MOV:
+            case self::MP4:
                 return MediaCollections::VIDEOS;
             default:
                 return MediaCollections::FILES;

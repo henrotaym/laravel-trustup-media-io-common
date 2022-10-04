@@ -41,7 +41,6 @@ enum MediaConversions: string
             case self::THUMBNAIL:
                 return 150;
 
-
             case self::BLUR:
                 return 50;
         endswitch;
@@ -70,7 +69,6 @@ enum MediaConversions: string
 
             case self::THUMBNAIL:
                 return 150;
-
 
             case self::BLUR:
                 return 50;
