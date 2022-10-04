@@ -4,6 +4,7 @@ namespace Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media;
 enum MediaMimeType: string
 {
     case JPEG = "image/jpeg";
+    case JPG = "image/jpg";
     case PNG = "image/png";
     case GIF = "image/gif";
     case SVG = "image/svg+xml";
@@ -16,16 +17,11 @@ enum MediaMimeType: string
     case XLS = "application/vnd.ms-excel";
     case CSV = "text/csv";
 
-
-    public function getMimeType(): string
-    {
-        return $this->value;
-    }
-
     public function getCollection(): MediaCollections
     {
         switch ($this):
             case self::JPEG
+                || self::JPG
                 || self::PNG
                 || self::GIF
                 || self::SVG
