@@ -28,4 +28,13 @@ enum MediaCollections: string
     {
         return count($this->getConversions()) > 0;
     }
+
+    /** @return array<MediaMimeType> */
+    public function getMimeTypes(): array
+    {
+        return array_filter(
+            MediaMimeType::cases(),
+            fn (MediaMimeType $mimeType) => $mimeType->getCollection() === $this
+        );
+    }
 }
