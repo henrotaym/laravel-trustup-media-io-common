@@ -15,7 +15,10 @@ class GetMediaRequestTransformer implements GetMediaRequestTransformerContract
             ->setCollection($attributes['collection'] ?? null)
             ->setModelId($attributes['model_id'])
             ->setModelType($attributes['model_type'])
-            ->firstOnly($attributes['first_only'] ?? false);
+            ->firstOnly($attributes['first_only'] ?? false)
+            ->setExpectedWidth($attributes['expected_width'] ?? null)
+            ->setExpectedHeight($attributes['expected_height'] ?? null)
+        ;
     }
 
     public function toArray(GetMediaRequestContract $request): array
@@ -25,7 +28,9 @@ class GetMediaRequestTransformer implements GetMediaRequestTransformerContract
             'model_type' => $request->getModelType(),
             'app_key' => $request->getAppKey(),
             'collection' => $request->getCollection(),
-            'first_only' => $request->isUsingFirstOnly()
+            'first_only' => $request->isUsingFirstOnly(),
+            'expected_width' => $request->getExpectedWidth(),
+            'expected_height' => $request->getExpectedHeight(),
         ];
     }
 }
