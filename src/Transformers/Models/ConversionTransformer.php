@@ -13,7 +13,7 @@ class ConversionTransformer implements ConversionTransformerContract
 
         return $conversion->setUrl($attributes['url'])
             ->setName($attributes['name'])
-            ->setWitdh($attributes['width'] ?? null)
+            ->setWidth($attributes['width'] ?? null)
             ->setHeight($attributes['height'] ?? null);
     }
 
@@ -22,7 +22,7 @@ class ConversionTransformer implements ConversionTransformerContract
         return [
             'url' => $conversion->getUrl(),
             'name' => $conversion->getName(),
-            'width' => $conversion->getWitdh(),
+            'width' => $conversion->getWidth(),
             "height" => $conversion->getHeight()
         ];
     }

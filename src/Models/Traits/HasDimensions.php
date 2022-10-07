@@ -8,7 +8,7 @@ trait HasDimensions
     protected ?int $width;
     protected ?int $height;
 
-    public function getWitdh(): ?int
+    public function getWidth(): ?int
     {
         return $this->width;
     }
@@ -19,7 +19,7 @@ trait HasDimensions
     }
 
     /** @return static */
-    public function setWitdh(?int $width): HasDimensionsContract
+    public function setWidth(?int $width): HasDimensionsContract
     {
         $this->width = $width;
 
