@@ -9,4 +9,14 @@ interface GetMediaRequestContract extends MediaRequestContract
 
     /** @return static */
     public function firstOnly(bool $firstOnly = true): GetMediaRequestContract;
+
+    /** @return static */
+    public function setExpectedWidth(?int $width): GetMediaRequestContract;
+
+    /** @return static */
+    public function setExpectedHeight(?int $height): GetMediaRequestContract;
+
+    public function getExpectedWidth(): ?int;
+
+    public function getExpectedHeight(): ?int;
 }
