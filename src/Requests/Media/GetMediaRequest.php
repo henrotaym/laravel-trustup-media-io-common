@@ -46,4 +46,14 @@ class GetMediaRequest extends MediaRequest implements GetMediaRequestContract
     {
         return $this->expectedHeight;
     }
+
+    public function hasExpectedWidth(): bool
+    {
+        return !!$this->expectedWidth;
+    }
+
+    public function hasExpectedHeight(): bool
+    {
+        return !!$this->expectedHeight;
+    }
 }

@@ -19,4 +19,8 @@ interface GetMediaRequestContract extends MediaRequestContract
     public function getExpectedWidth(): ?int;
 
     public function getExpectedHeight(): ?int;
+
+    public function hasExpectedWidth(): bool;
+
+    public function hasExpectedHeight(): bool;
 }
