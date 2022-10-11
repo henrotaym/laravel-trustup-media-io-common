@@ -12,13 +12,17 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Models\ConversionTransfor
 use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Models\StorableMediaTransformer;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelPackageVersioning\Providers\Abstracts\VersionablePackageServiceProvider;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\DestroyMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\StoreMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Requests\Media\GetMediaRequestTransformer;
 use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Requests\Media\StoreMediaRequestTransformer;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\ConversionTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\StorableMediaTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\DestroyMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
+use Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media\DestroyMediaRequest;
+use Henrotaym\LaravelTrustupMediaIoCommon\Transformers\Requests\Media\DestroyMediaRequestTransformer;
 
 class LaravelTrustupMediaIoCommonServiceProvider extends VersionablePackageServiceProvider
 {
@@ -32,9 +36,11 @@ class LaravelTrustupMediaIoCommonServiceProvider extends VersionablePackageServi
         $this->app->bind(StorableMediaContract::class, StorableMedia::class);
         $this->app->bind(GetMediaRequestContract::class, GetMediaRequest::class);
         $this->app->bind(StoreMediaRequestContract::class, StoreMediaRequest::class);
+        $this->app->bind(DestroyMediaRequestContract::class, DestroyMediaRequest::class);
         $this->app->bind(StorableMediaTransformerContract::class, StorableMediaTransformer::class);
         $this->app->bind(GetMediaRequestTransformerContract::class, GetMediaRequestTransformer::class);
         $this->app->bind(StoreMediaRequestTransformerContract::class, StoreMediaRequestTransformer::class);
+        $this->app->bind(DestroyMediaRequestTransformerContract::class, DestroyMediaRequestTransformer::class);
         $this->app->bind(ConversionContract::class, Conversion::class);
         $this->app->bind(ConversionTransformerContract::class, ConversionTransformer::class);
     }
