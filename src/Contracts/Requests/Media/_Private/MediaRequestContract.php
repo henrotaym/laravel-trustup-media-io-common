@@ -24,7 +24,7 @@ interface MediaRequestContract
 
     public function hasModelId(): bool;
     
-    public function getModelId(): int;
+    public function getModelId(): string;
 
     /** @return static */
     public function setCollection(?string $collection = null): MediaRequestContract;
@@ -39,5 +39,5 @@ interface MediaRequestContract
     public function setModelType(string $modelType): MediaRequestContract;
     
     /** @return static */
-    public function setModelId(int $modelId): MediaRequestContract;
+    public function setModelId(string $modelId): MediaRequestContract;
 }

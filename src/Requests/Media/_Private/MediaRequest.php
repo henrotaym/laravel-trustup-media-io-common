@@ -47,7 +47,7 @@ abstract class MediaRequest implements MediaRequestContract
     }
     
     /** @return static */
-    public function setModelId(int $modelId): MediaRequestContract
+    public function setModelId(string $modelId): MediaRequestContract
     {
         $this->modelId = $modelId;
 
@@ -97,7 +97,7 @@ abstract class MediaRequest implements MediaRequestContract
         return !!$this->modelId;
     }
     
-    public function getModelId(): int
+    public function getModelId(): string
     {
         return $this->modelId;
     }
