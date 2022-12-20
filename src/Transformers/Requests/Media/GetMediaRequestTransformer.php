@@ -11,13 +11,18 @@ class GetMediaRequestTransformer implements GetMediaRequestTransformerContract
         /** @var GetMediaRequestContract */
         $request = app()->make(GetMediaRequestContract::class);
 
+        if ($modelId = $attributes['model_id'] ?? null)
+            $request->setModelId($modelId);
+
+        if ($modelType = $attributes['model_type' ?? null])
+            $request->setModelType($modelType);
+
         return $request->setAppKey($attributes['app_key'] ?? null)
             ->setCollection($attributes['collection'] ?? null)
-            ->setModelId($attributes['model_id'])
-            ->setModelType($attributes['model_type'])
             ->firstOnly($attributes['first_only'] ?? false)
             ->setExpectedWidth($attributes['expected_width'] ?? null)
             ->setExpectedHeight($attributes['expected_height'] ?? null)
+            ->setUuids(collect($attributes['uuids'] ?? null))
         ;
     }
 
@@ -31,6 +36,7 @@ class GetMediaRequestTransformer implements GetMediaRequestTransformerContract
             'first_only' => $request->isUsingFirstOnly(),
             'expected_width' => $request->getExpectedWidth(),
             'expected_height' => $request->getExpectedHeight(),
+            'uuids' => $request->getUuids()->all()
         ];
     }
 }

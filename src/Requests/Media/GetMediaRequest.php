@@ -3,12 +3,22 @@ namespace Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media;
 
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Requests\Media\GetMediaRequestContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Requests\Media\_Private\MediaRequest;
+use Illuminate\Support\Collection;
 
 class GetMediaRequest extends MediaRequest implements GetMediaRequestContract
 {
     protected bool $isFirstOnly = false;
     protected ?int $expectedHeight = null;
     protected ?int $expectedWidth = null;
+    protected ?string $modelType = null;
+    protected ?string $modelId = null;
+
+    /**
+     * Related uuids.
+     * 
+     * @return Collection<int, string>
+     */
+    protected Collection $uuids;
 
     public function isUsingFirstOnly(): bool
     {
@@ -55,5 +65,47 @@ class GetMediaRequest extends MediaRequest implements GetMediaRequestContract
     public function hasExpectedHeight(): bool
     {
         return !!$this->expectedHeight;
+    }
+
+    public function getUuids(): Collection
+    {
+        return $this->uuids ?? 
+            $this->uuids = collect();
+    }
+
+    public function isUsingUuids(): bool
+    {
+        return $this->getUuids()->isNotEmpty();
+    }
+
+    public function addUuid(string $uuid): GetMediaRequestContract
+    {
+        $this->getUuids()->push($uuid);
+
+        return $this;
+    }
+
+    public function setUuids(Collection $uuids): GetMediaRequestContract
+    {
+        $this->uuids = $uuids;
+
+        return $this;
+    }
+
+    public function addUuids(Collection $uuids): GetMediaRequestContract
+    {
+        $this->getUuids()->push(...$uuids);
+
+        return $this;
+    }
+
+    public function getModelType(): ?string
+    {
+        return $this->modelType;
+    }
+
+    public function getModelId(): ?string
+    {
+        return $this->modelId;
     }
 }

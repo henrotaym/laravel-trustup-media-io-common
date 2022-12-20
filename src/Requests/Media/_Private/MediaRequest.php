@@ -6,8 +6,6 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Enums\Media\MediaCollections;
 
 abstract class MediaRequest implements MediaRequestContract
 {
-    protected string $modelType;
-    protected string $modelId;
     protected bool $explicitelyNotHavingAppKey = false;
     protected ?string $collection = null;
     protected ?string $appKey = null;
@@ -84,21 +82,13 @@ abstract class MediaRequest implements MediaRequestContract
     
     public function hasModelType(): bool
     {
-        return !!$this->modelType;
+        return isset($this->modelType) && !!$this->modelType;
     }
 
-    public function getModelType(): string
-    {
-        return $this->modelType;
-    }
     
     public function hasModelId(): bool
     {
-        return !!$this->modelId;
+        return isset($this->modelId) && !!$this->modelId;
     }
     
-    public function getModelId(): string
-    {
-        return $this->modelId;
-    }
 }

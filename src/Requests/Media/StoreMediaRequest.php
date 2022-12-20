@@ -13,6 +13,9 @@ class StoreMediaRequest extends MediaRequest implements StoreMediaRequestContrac
 
     protected bool $queue = true;
 
+    protected string $modelType;
+    protected string $modelId;
+
     /** @return Collection<int, StorableMediaContract> */
     public function getMedia(): Collection
     {
@@ -50,5 +53,15 @@ class StoreMediaRequest extends MediaRequest implements StoreMediaRequestContrac
         $this->queue = $isUsingQueue;
         
         return $this;
+    }
+
+    public function getModelType(): string
+    {
+        return $this->modelType;
+    }
+
+    public function getModelId(): string
+    {
+        return $this->modelId;
     }
 }

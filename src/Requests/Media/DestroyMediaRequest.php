@@ -10,6 +10,9 @@ class DestroyMediaRequest extends MediaRequest implements DestroyMediaRequestCon
     /** @var Collection<int, string> */
     protected Collection $uuids;
 
+    protected string $modelType;
+    protected string $modelId;
+
     /** @return static */
     public function addUuid(string $uuid): DestroyMediaRequestContract
     {
@@ -36,5 +39,15 @@ class DestroyMediaRequest extends MediaRequest implements DestroyMediaRequestCon
     public function hasUuids(): bool
     {
         return $this->getUuids()->isNotEmpty();
+    }
+
+    public function getModelType(): string
+    {
+        return $this->modelType;
+    }
+
+    public function getModelId(): string
+    {
+        return $this->modelId;
     }
 }

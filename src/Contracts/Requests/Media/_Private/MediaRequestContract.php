@@ -20,12 +20,8 @@ interface MediaRequestContract
     
     public function hasModelType(): bool;
 
-    public function getModelType(): string;
-
     public function hasModelId(): bool;
     
-    public function getModelId(): string;
-
     /** @return static */
     public function setCollection(?string $collection = null): MediaRequestContract;
 

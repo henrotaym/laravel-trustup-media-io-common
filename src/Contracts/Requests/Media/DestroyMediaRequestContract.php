@@ -19,4 +19,8 @@ interface DestroyMediaRequestContract extends MediaRequestContract
     
     /** @return Collection<int, string> */
     public function getUuids(): Collection;
+
+    public function getModelType(): string;
+    
+    public function getModelId(): string;
 }

@@ -23,4 +23,8 @@ interface StoreMediaRequestContract extends MediaRequestContract
 
     /** @return static */
     public function useQueue(bool $isUsingQueue): StoreMediaRequestContract;
+
+    public function getModelType(): string;
+
+    public function getModelId(): string;
 }
