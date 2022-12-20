@@ -14,7 +14,7 @@ class GetMediaRequestTransformer implements GetMediaRequestTransformerContract
         if ($modelId = $attributes['model_id'] ?? null)
             $request->setModelId($modelId);
 
-        if ($modelType = $attributes['model_type' ?? null])
+        if ($modelType = $attributes['model_type'] ?? null)
             $request->setModelType($modelType);
 
         return $request->setAppKey($attributes['app_key'] ?? null)
