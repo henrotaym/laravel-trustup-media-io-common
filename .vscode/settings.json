@@ -1,0 +1,8 @@
+{
+    "laraguide.enableLarastan": true,
+    "laraguide.enablePint": true,
+    "[php]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "henrotaym.laraguide"
+    },
+}

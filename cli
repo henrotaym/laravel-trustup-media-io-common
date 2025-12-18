@@ -1,0 +1,45 @@
+#!/bin/bash
+
+if [ "$1" == "bootstrap" ]
+    then
+        ./scripts/bootstrap.sh
+    exit
+fi
+
+if [ "$1" == "run" ]
+    then
+        docker compose run --rm -it "${@:2}"
+    exit
+fi
+
+if [ "$1" == "bun" ]
+    then
+        ./cli run bun $@
+    exit
+fi
+
+if [ "$1" == "test" ]
+    then
+        ./cli ./vendor/bin/phpunit "${@:2}"
+    exit
+fi
+
+if [ "$1" == "testf" ]
+    then
+        ./cli test --filter="${@:2}"
+    exit
+fi
+
+if [ "$1" == "format" ]
+    then
+        ./cli ./vendor/bin/pint ${@:2}
+    exit
+fi
+
+if [ "$1" == "analyze" ]
+    then
+        ./cli ./vendor/bin/phpstan analyse ${@:2}
+    exit
+fi
+
+./cli run cli $@

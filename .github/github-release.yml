@@ -1,0 +1,113 @@
+#
+# GitHub Action: Create and Publish GitHub Release
+#
+# This workflow automates the weekly release process after a merge to the 'main' branch.
+#
+# Trigger:
+#   - Runs automatically on every push to the 'main' branch.
+#   - Can also be triggered manually from the GitHub Actions tab (`workflow_dispatch`).
+#
+# Actions:
+#   1. Checks out the repository's code.
+#   2. Configures Git user identity for commits made by the action.
+#   3. Sets up the Node.js environment.
+#   4. Installs project dependencies.
+#   5. Runs 'changeset version' to consume changes, bump package versions, and check if a new version was created.
+#   6. If a new version exists, commits the updated package.json and CHANGELOG.md files.
+#   7. Publishes the updated packages to the registry and creates corresponding Git tags.
+#   8. Pushes the release commit and all newly created tags to the 'main' branch.
+#   9. Creates a new GitHub Release with notes extracted from the CHANGELOG.md file.
+#
+name: 📝 Github Release
+
+on:
+  push:
+    branches:
+      - main
+
+  # Manual trigger from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Create and Publish Github Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate App Token
+        id: generate_token
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.ACTION_GITHUB_FOREMAN_APP_ID }}
+          private-key: ${{ secrets.ACTION_GITHUB_FOREMAN_APP_PRIVATE_KEY }}
+      # Step 1: Check out the repository's code, including all branches and history (`fetch-depth: 0`).
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ steps.generate_token.outputs.token }}
+
+      # Step 2: Set up Git user identity for the commits that will be made by the workflow.
+      - name: Configure Git User
+        run: |
+          git config user.name "trustup-foreman[bot]"
+          git config user.email "${{ secrets.ACTION_GITHUB_FOREMAN_APP_ID }}+trustup-foreman[bot]@users.noreply.github.com"
+
+      # Step 6: Install bun package manager.
+      - name: Setup bun 1
+        uses: oven-sh/setup-bun@v1
+
+      # Step 4: Install project dependencies using the frozen lockfile for consistency.
+      - name: Install Dependencies
+        run: bun install --frozen-lockfile
+
+      # Step 5: Run 'changeset version' to consume changeset files, bump package versions, and check if a release is needed.
+      - name: Check for new version
+        id: version_check
+        run: |
+          old_version=$(jq -r .version package.json)
+          bun changeset version
+          new_version=$(jq -r .version package.json)
+          has_changesets=$([ "$old_version" == "$new_version" ] && echo false || echo true)
+          echo "new_version=$new_version" >> $GITHUB_OUTPUT
+          echo "has_changesets=$has_changesets" >> $GITHUB_OUTPUT
+
+      # Step 6: Commit the modified version and changelog files with a dynamic message (e.g., "Release v1.2.3").
+      - name: Commit release files
+        if: steps.version_check.outputs.has_changesets == 'true'
+        run: |
+          git add .
+          git commit -m "📝 Release v${{ steps.version_check.outputs.new_version }}"
+
+      # Step 7: Publish updated packages to the registry (e.g., npm) and create corresponding Git tags.
+      - name: Publish to registry and create Git tags
+        if: steps.version_check.outputs.has_changesets == 'true'
+        run: bun changeset publish
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Uncomment if publishing to npm
+
+      # Step 8: Push the release commit and all newly created tags to the remote 'main' branch.
+      - name: Push changes and tags
+        if: steps.version_check.outputs.has_changesets == 'true'
+        run: git push --follow-tags
+
+      # Step 9: Create GitHub Release using the content from CHANGELOG.md.
+      - name: Create GitHub Release
+        if: steps.version_check.outputs.has_changesets == 'true'
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.token }}
+        run: |
+          VERSION="${{ steps.version_check.outputs.new_version }}"
+          TAG="v${VERSION}"
+          
+          # Extract the release notes for the current version from CHANGELOG.md
+          NOTES=$(awk -v version="## ${VERSION}" '/^## / {if (p) exit; if ($0 ~ version) p=1; next} p' CHANGELOG.md)
+          
+          # Check if notes were found
+          if [ -z "$NOTES" ]; then
+            echo "Could not find changelog entries for version ${VERSION}."
+            exit 1
+          fi
+          
+          # Create the release using the extracted notes
+          gh release create "$TAG" --title "$TAG" --notes "$NOTES"

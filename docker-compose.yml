@@ -1,0 +1,19 @@
+services:
+  cli:
+    build:
+      context: .
+      target: cli
+      dockerfile: Dockerfile
+    image: "laravel-trustup-io-media-common-php-local"
+    volumes:
+      - ./:/opt/apps/app
+    env_file:
+      - .env
+  bun:
+    build:
+      context: .
+      target: bun
+      dockerfile: Dockerfile
+    image: "laravel-trustup-io-media-common-bun-local"
+    volumes:
+      - ./:/opt/apps/app
