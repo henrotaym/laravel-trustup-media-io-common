@@ -12,6 +12,12 @@ if [ "$1" == "run" ]
     exit
 fi
 
+if [ "$1" == "bun" ]
+    then
+        ./cli run bun $@
+    exit
+fi
+
 if [ "$1" == "test" ]
     then
         ./cli run cli ./vendor/bin/phpunit "${@:2}"

@@ -1,12 +1,17 @@
 {
-    "name": "laravel-trustup-media-io-common",
+    "name": "@henrotaym/laravel-trustup-media-io-common",
     "version": "2.0.0",
     "main": "index.js",
     "repository": "git@github.com:henrotaym/laravel-trustup-media-io-common.git",
     "author": "Mathieu Henrotay <mathieu.henrotay@gmail.com>",
     "license": "MIT",
     "private": true,
+    "devDependencies": {
+        "@changesets/cli": "^2.29.7",
+        "@evilmartians/lefthook": "^1.11.13"
+    },
     "scripts": {
+        "release": "changeset publish",
         "postversion": "git push && git push --tags"
     }
 }

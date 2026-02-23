@@ -1,4 +1,4 @@
-FROM php:8.2-cli-alpine AS cli
+FROM php:8.3-cli-alpine AS cli
 
 COPY --from=composer:2.5.8 /usr/bin/composer /usr/bin/composer
 
@@ -11,3 +11,9 @@ RUN composer install --no-scripts --no-autoloader --prefer-dist
 COPY . .
 
 RUN composer install --prefer-dist
+
+FROM oven/bun:1.3 AS bun
+
+WORKDIR /opt/apps/app
+
+COPY . .
