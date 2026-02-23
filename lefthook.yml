@@ -1,9 +1,0 @@
-pre-commit:
-  parallel: true
-  commands:
-    format:
-      glob: '*.{php}'
-      run: ./cli format {staged_files} && git add {staged_files}
-    analyze:
-      glob: '*.{php}'
-      run: ./cli analyze {staged_files}

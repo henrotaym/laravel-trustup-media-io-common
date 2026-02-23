@@ -12,15 +12,9 @@ if [ "$1" == "run" ]
     exit
 fi
 
-if [ "$1" == "bun" ]
-    then
-        ./cli run bun $@
-    exit
-fi
-
 if [ "$1" == "test" ]
     then
-        ./cli ./vendor/bin/phpunit "${@:2}"
+        ./cli run cli ./vendor/bin/phpunit "${@:2}"
     exit
 fi
 
@@ -30,15 +24,9 @@ if [ "$1" == "testf" ]
     exit
 fi
 
-if [ "$1" == "format" ]
+if [ "$1" == "composer" ]
     then
-        ./cli ./vendor/bin/pint ${@:2}
-    exit
-fi
-
-if [ "$1" == "analyze" ]
-    then
-        ./cli ./vendor/bin/phpstan analyse ${@:2}
+        ./cli run cli composer "${@:2}"
     exit
 fi
 

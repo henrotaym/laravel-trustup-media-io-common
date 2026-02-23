@@ -11,23 +11,22 @@ use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Models\Storable
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\DestroyMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\GetMediaRequestTransformerContract;
 use Henrotaym\LaravelTrustupMediaIoCommon\Contracts\Transformers\Requests\Media\StoreMediaRequestTransformerContract;
+use PHPUnit\Framework\Attributes\Test;
 
 class InstallingPackageTest extends TestCase
 {
     use InstallPackageTest;
 
-    /** @test */
-    public function gettingMediaClient()
+    #[Test]
+    public function resolving_contracts(): void
     {
-        dd(
-            $this->app->make(StorableMediaContract::class),
-            $this->app->make(GetMediaRequestContract::class),
-            $this->app->make(StoreMediaRequestContract::class),
-            $this->app->make(DestroyMediaRequestContract::class),
-            $this->app->make(StorableMediaTransformerContract::class),
-            $this->app->make(GetMediaRequestTransformerContract::class),
-            $this->app->make(StoreMediaRequestTransformerContract::class),
-            $this->app->make(DestroyMediaRequestTransformerContract::class)
-        );
+        $this->assertInstanceOf(StorableMediaContract::class, $this->app->make(StorableMediaContract::class));
+        $this->assertInstanceOf(GetMediaRequestContract::class, $this->app->make(GetMediaRequestContract::class));
+        $this->assertInstanceOf(StoreMediaRequestContract::class, $this->app->make(StoreMediaRequestContract::class));
+        $this->assertInstanceOf(DestroyMediaRequestContract::class, $this->app->make(DestroyMediaRequestContract::class));
+        $this->assertInstanceOf(StorableMediaTransformerContract::class, $this->app->make(StorableMediaTransformerContract::class));
+        $this->assertInstanceOf(GetMediaRequestTransformerContract::class, $this->app->make(GetMediaRequestTransformerContract::class));
+        $this->assertInstanceOf(StoreMediaRequestTransformerContract::class, $this->app->make(StoreMediaRequestTransformerContract::class));
+        $this->assertInstanceOf(DestroyMediaRequestTransformerContract::class, $this->app->make(DestroyMediaRequestTransformerContract::class));
     }
 }
