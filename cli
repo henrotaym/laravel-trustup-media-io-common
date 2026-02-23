@@ -30,4 +30,16 @@ if [ "$1" == "composer" ]
     exit
 fi
 
+if [ "$1" == "format" ]
+    then
+        ./cli run cli ./vendor/bin/pint ${@:2}
+    exit
+fi
+
+if [ "$1" == "analyze" ]
+    then
+        ./cli run cli ./vendor/bin/phpstan analyse ${@:2}
+    exit
+fi
+
 ./cli run cli $@
